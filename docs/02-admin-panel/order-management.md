@@ -1,88 +1,133 @@
 # ARVEN Commerce OS (ACOS)
 
-# Order Management Blueprint
+# Order Management
 
-Version: 1.0
+Version: 2.0 Draft
 
 Last Updated: July 2026
+
+Document Type:
+Software Design Specification (SDS)
+
+Status:
+Draft
+
+---
+
+# Table of Contents
+
+1. Purpose
+2. Vision
+3. Scope
+4. Business Goals
+5. Supported Sales Channels
+6. Order Lifecycle
+7. User Roles
+8. Dashboard Layout
+9. Order List
+10. Order Details
+11. Order Status
+12. Customer Communication
+13. Payment Management
+14. Courier Management
+15. Fraud Prevention
+16. Employee Assignment
+17. Automation
+18. Notifications
+19. Reports & Analytics
+20. Security
+21. Future Expansion
 
 ---
 
 # Purpose
 
-The Order Management module is the operational heart of ARVEN Commerce OS.
+The Order Management module is the operational heart of ARVEN Commerce OS (ACOS).
 
-Every customer order, regardless of its source, enters this module before being verified, processed, packed, shipped, delivered, returned, cancelled, or refunded.
+Every customer order, regardless of its source, enters this module before being verified, processed, packed, shipped, delivered, returned, exchanged, cancelled, or refunded.
 
-This module is designed to give business owners and employees complete operational control while minimizing manual work and maximizing processing speed.
+The module is designed to provide business owners, administrators, and operational employees with complete visibility and control over every stage of the order lifecycle.
 
-Unlike traditional ecommerce systems, the Order Management module should act as a centralized operational workspace rather than a simple order list.
+Instead of functioning as a simple order list, the module serves as a centralized operational workspace where all order-related activities can be completed without leaving the administration panel.
 
 ---
 
-# Objectives
+# Vision
 
-The Order Management module should enable businesses to:
+Build one of the most advanced ecommerce order management systems in Bangladesh.
 
-- Process orders quickly
-- Reduce operational mistakes
+The system should support businesses processing hundreds or even thousands of daily orders while maintaining speed, transparency, security, and operational efficiency.
+
+Business owners should never need to modify source code for routine operational requirements.
+
+Every common workflow should be configurable from the Admin Panel.
+
+---
+
+# Scope
+
+The Order Management module includes:
+
+- New Orders
+- Pending Verification
+- Confirmed Orders
+- Processing Orders
+- Packed Orders
+- Courier Assignment
+- Shipment Tracking
+- Delivered Orders
+- Cancelled Orders
+- Failed Orders
+- Returned Orders
+- Exchange Orders
+- Refund Requests
+- Customer Communication
+- Internal Notes
+- Employee Assignment
+- Timeline History
+- Fraud Detection
+- Analytics
+- Audit Logs
+
+---
+
+# Business Goals
+
+The module is designed to help businesses:
+
+- Process orders faster
+- Reduce fake orders
+- Reduce delivery failures
 - Improve customer communication
-- Prevent fake orders
-- Track employee activities
-- Integrate courier services
-- Generate invoices
-- Export reports
-- Maintain complete order history
-
-Every design decision should prioritize operational efficiency.
+- Increase employee productivity
+- Improve delivery success rate
+- Reduce manual operations
+- Maintain complete order transparency
+- Support future business growth
 
 ---
 
-# Core Responsibilities
+# Supported Sales Channels
 
-This module is responsible for:
+Orders may originate from:
 
-- Receiving new orders
-- Managing order lifecycle
-- Customer verification
-- Internal communication
-- Courier assignment
-- Invoice generation
-- Shipping status
-- Delivery confirmation
-- Return management
-- Cancellation handling
-- Fraud prevention
-- Reporting
-
----
-
-# Supported Order Sources
-
-Orders may originate from multiple channels.
-
-Initially supported:
-
-- Website Storefront
-- Manual Admin Order
-
-Future supported:
-
+- Official Website
+- Manual Admin Entry
 - Facebook Shop
 - Instagram Shop
 - Messenger
 - WhatsApp
-- Mobile App
-- Marketplace APIs
-- Public REST API
+- Mobile Application (Future)
+- Marketplace Integrations (Future)
+- Public API (Future)
 
-The original source of every order must be stored permanently.
+Every order permanently stores its original source.
 
 ---
 
 # Order Lifecycle
 
-Every order follows a predefined workflow.
+Every order follows a standardized workflow.
 
 New Order
 
@@ -92,10 +137,6 @@ Pending Verification
 
 ↓
 
-Verified
-
-↓
-
 Confirmed
 
 ↓
@@ -122,7 +163,7 @@ Out For Delivery
 
 Delivered
 
-Alternative paths:
+Alternative workflows:
 
 Pending
 
@@ -130,872 +171,382 @@ Pending
 
 Cancelled
 
-Processing
+Delivered
 
 ↓
 
-Returned
-
-Processing
+Return Requested
 
 ↓
 
-Failed Delivery
-
-Returned
+Inspection
 
 ↓
 
-Refunded
+Refund
 
-Every status change must create a timeline record.
+OR
 
-No status transition should happen silently.
+Exchange
+
+Every status transition must automatically create:
+
+- Timeline Event
+- Audit Log
+- Notification
+- Analytics Update
 
 ---
 
-# Business Workflow
+# Design Principles
 
-Customer places an order.
+The Order Management module follows the following principles.
 
-↓
+## Operational Efficiency
 
-System validates the request.
-
-↓
-
-Order enters Pending Queue.
-
-↓
-
-Employee reviews the order.
-
-↓
-
-Customer is contacted if necessary.
-
-↓
-
-Order is verified.
-
-↓
-
-Inventory is reserved.
-
-↓
-
-Courier is assigned.
-
-↓
-
-Invoice is generated.
-
-↓
-
-Package is shipped.
-
-↓
-
-Tracking information is updated.
-
-↓
-
-Customer receives the order.
-
-↓
-
-Reports update automatically.
+Employees should complete common tasks using the fewest possible clicks.
 
 ---
 
-# User Roles
+## Complete Transparency
 
-## Super Admin
-
-Full unrestricted access.
-
-Can:
-
-- View every order
-- Edit orders
-- Delete orders
-- Restore deleted orders
-- Export reports
-- Configure workflows
-- View audit logs
-- Manage employees
-- Override permissions
+Every action performed on an order must be recorded and traceable.
 
 ---
 
-## Admin
+## Security First
 
-Operational management access.
-
-Can:
-
-- Confirm orders
-- Cancel orders
-- Assign couriers
-- Print invoices
-- Edit customer information
-- Create manual orders
-- Export reports
-
-Cannot modify system configuration.
+Critical actions require proper authentication and authorization.
 
 ---
 
-## Employee
+## Real-Time Synchronization
 
-Operational staff.
-
-Can:
-
-- View assigned orders
-- Confirm orders
-- Cancel orders
-- Call customers
-- Open WhatsApp
-- Add internal notes
-- Assign courier (if permitted)
-
-Cannot:
-
-- Delete orders
-- Access analytics
-- Manage employees
-- Access integrations
-- Modify system settings
+Order information should remain synchronized across the platform.
 
 ---
 
-# Design Philosophy
+## Modular Architecture
 
-The Order Management interface should prioritize:
-
-- Speed
-- Simplicity
-- Visibility
-- Accuracy
-- Mobile responsiveness
-- Bulk operations
-- Minimal clicks
-
-Employees should complete common tasks within one or two clicks.
-
----
-
-# Dashboard Integration
-
-The Admin Dashboard should display live statistics for:
-
-- Pending Orders
-- Verified Orders
-- Confirmed Orders
-- Processing Orders
-- Packed Orders
-- Shipped Orders
-- Delivered Orders
-- Returned Orders
-- Cancelled Orders
-- Failed Orders
-
-Each card should open a filtered order list.
-
----
-
-# Key Principles
-
-The Order Management module must always be:
-
-- Real-time
-- Secure
-- Fast
-- Modular
-- Scalable
-- API-driven
-- Audit-friendly
-
-Every business action must leave a trace in the audit history.
+Every feature should remain independently maintainable and extendable without affecting existing workflows.
 
 ---
 
 # Success Criteria
 
-The module will be considered successful when employees can efficiently process hundreds of daily orders while business owners maintain complete operational visibility without requiring software modifications.
+The module is considered successful when:
+
+- Order processing becomes significantly faster.
+- Fake orders decrease.
+- Delivery success rate increases.
+- Employees require fewer manual steps.
+- Business owners gain complete operational visibility.
+- Every action is traceable through logs and timelines.
 
 ---
 
-# Order List Interface
+Status:
+Draft
 
-The Order List is the primary operational workspace for employees.
-
-Employees should spend most of their working time inside this interface.
-
-The interface must prioritize speed, readability, and minimal interaction.
-
-Employees should never need to open multiple pages to complete routine order processing.
 
 ---
 
-# Default View
+# User Roles
 
-When opening Order Management, users should immediately see:
+Different users have different responsibilities.
 
-Pending Orders
+The Order Management module must enforce role-based access control.
 
-The default sorting order should be:
+## Super Admin
 
-Newest First
+Has unrestricted access to all order-related operations.
 
-This allows employees to process fresh orders immediately.
+Permissions include:
 
----
-
-# Layout
-
-Desktop Layout
-
-┌──────────────────────────────────────────────────────────────────────────────┐
-│ Search │ Filters │ Bulk Actions │ Refresh │ Export │ View Options │
-├──────────────────────────────────────────────────────────────────────────────┤
-│ Order List Table                                                    │
-├──────────────────────────────────────────────────────────────────────────────┤
-│ Pagination                                                         │
-└──────────────────────────────────────────────────────────────────────────────┘
+- View all orders
+- Edit any order
+- Delete orders (if enabled)
+- Assign employees
+- Manage payments
+- Book couriers
+- Process refunds
+- Export reports
+- View audit logs
+- Configure order settings
 
 ---
 
-# Pending Order Table
+## Admin
 
-The table should display only important information.
+Permissions depend on assigned roles.
 
-It should remain clean and easy to scan.
+Typical permissions include:
+
+- View orders
+- Confirm orders
+- Cancel orders
+- Assign courier
+- Update status
+- Add internal notes
+- Contact customers
+
+Sensitive actions require explicit permission.
+
+---
+
+## Employee
+
+Employees only see features related to their assigned responsibilities.
+
+Examples:
+
+Order Processing Employee
+
+- Pending Orders
+- Confirm Orders
+- Cancel Orders
+- Customer Contact
+
+Courier Employee
+
+- Courier Booking
+- Tracking
+- Delivery Status
+
+Customer Support Employee
+
+- Customer Calls
+- WhatsApp
+- Internal Notes
+- Returns
+
+Employees cannot access system settings.
+
+---
+
+# Dashboard Summary
+
+The top of the Order Management page displays operational statistics.
+
+Default widgets:
+
+- Total Orders Today
+- Pending Orders
+- Confirmed Orders
+- Processing Orders
+- Packed Orders
+- Shipped Orders
+- Delivered Orders
+- Cancelled Orders
+- Failed Orders
+- Returned Orders
+
+Each widget displays:
+
+- Count
+- Percentage Change
+- Trend Indicator
+- Quick Navigation
+
+Clicking any widget opens the filtered order list.
+
+---
+
+# Order List
+
+The order list is the primary working area.
+
+The list should remain clean, fast, and optimized for handling hundreds of daily orders.
+
+Each row displays only essential information.
 
 Columns:
 
-• Order ID
+- Order ID
+- Customer Name
+- Phone Number
+- Order Items
+- Quantity
+- Total Amount
+- Payment Method
+- Order Status
+- Assigned Employee
+- Order Date
+- Action Button
 
-• Customer Name
-
-• Phone Number
-
-• Number of Products
-
-• Total Quantity
-
-• Total Amount
-
-• Payment Method
-
-• Order Source
-
-• Order Time
-
-• Assigned Employee
-
-• Current Status
-
-• Quick Actions
+Rows should remain compact for maximum visibility.
 
 ---
 
-# Example Table
+# Quick Preview
 
-| ID | Customer | Phone | Items | Qty | Total | Payment | Source | Time | Status | Actions |
-|----|----------|-------|-------|-----|--------|---------|--------|------|---------|---------|
-| #10541 | Ashik | 01830***** | 2 | 3 | ৳3,250 | COD | Website | 3 min | Pending | 👁 📞 💬 ✅ ❌ |
+Clicking anywhere on a row should open the complete Order Details panel.
 
----
-
-# Quick Actions
-
-Every order row should provide instant actions.
-
-Supported actions:
-
-👁 View Details
-
-📞 Call Customer
-
-💬 WhatsApp
-
-✅ Confirm
-
-❌ Cancel
-
-📝 Internal Note
-
-Employees should complete common actions without opening the details page.
-
----
-
-# View Details
-
-Clicking the Eye icon opens the complete order details.
-
-Recommended behavior:
-
-Desktop
-
-Open a Right Side Drawer.
-
-Avoid opening a completely new page whenever possible.
-
-This keeps employees inside the order list.
-
-Mobile
-
-Open a Full Screen Details Page.
-
----
-
-# Quick Status Change
-
-Status should be editable directly from the table.
-
-Supported transitions:
-
-Pending
-
-↓
-
-Verified
-
-↓
-
-Confirmed
-
-↓
-
-Processing
-
-↓
-
-Packed
-
-↓
-
-Courier Assigned
-
-↓
-
-Shipped
-
-↓
-
-Delivered
-
-Cancel should always require confirmation.
+Employees should never navigate away from the Order Management page to inspect an order.
 
 ---
 
 # Search
 
-Instant search should support:
+Global search should support:
 
-Order ID
+- Order ID
+- Customer Name
+- Phone Number
+- Product Name
+- Tracking Number
 
-Customer Name
-
-Phone Number
-
-Tracking Number
-
-Invoice Number
-
-The search should update results instantly.
+Search results must appear instantly.
 
 ---
 
 # Filters
 
-Available filters:
+Users can filter orders by:
 
-Status
+- Status
+- Date Range
+- Payment Method
+- Courier
+- Employee
+- District
+- Order Source
+- Product
+- Amount Range
 
-Date
-
-Today
-
-Yesterday
-
-Last 7 Days
-
-Last 30 Days
-
-Payment Method
-
-Courier
-
-Employee
-
-Order Source
-
-District
-
-Division
-
-Amount Range
-
-Coupon Used
-
-Fraud Score
+Multiple filters can be combined.
 
 ---
 
 # Sorting
 
-Sort by:
+Supported sorting options:
 
-Newest
-
-Oldest
-
-Highest Amount
-
-Lowest Amount
-
-Alphabetical Customer
-
-Delivery Priority
+- Newest First
+- Oldest First
+- Highest Amount
+- Lowest Amount
+- Customer Name
+- Delivery Date
 
 ---
 
-# Bulk Operations
+# Bulk Actions
 
-Employees should process multiple orders simultaneously.
+Administrators should perform actions on multiple orders simultaneously.
 
-Supported actions:
+Supported bulk actions:
 
-Confirm
+- Confirm Orders
+- Cancel Orders
+- Assign Employee
+- Assign Courier
+- Print Invoice
+- Export CSV
+- Export Excel
+- Send SMS (Future)
+- Send WhatsApp (Future)
 
-Cancel
-
-Assign Courier
-
-Print Invoice
-
-Export
-
-Assign Employee
-
-Mark Verified
-
-Generate Labels
+Bulk actions should always require confirmation before execution.
 
 ---
 
-# Pagination
+Status:
+Draft
+
+---
+
+# Order Details Panel
+
+Selecting an order from the Order List opens a dedicated Order Details panel.
+
+The panel should appear instantly without requiring navigation to another page.
+
+The objective is to allow employees to complete every order-related task from a single workspace.
+
+---
+
+# Panel Layout
+
+The Order Details panel is divided into the following sections:
+
+1. Order Summary
+2. Customer Information
+3. Ordered Products
+4. Payment Information
+5. Delivery Information
+6. Courier Information
+7. Employee Assignment
+8. Internal Notes
+9. Order Timeline
+10. Quick Actions
+
+Each section should remain visually separated for better readability.
+
+---
+
+# Order Summary
 
 Display:
 
-25
-
-50
-
-100
-
-200
-
-Orders Per Page
-
-Admins may configure the default page size.
-
----
-
-# Sticky Toolbar
-
-The top toolbar should remain visible while scrolling.
-
-This allows users to search, filter and perform bulk actions without scrolling back to the top.
-
----
-
-# Color Coding
-
-Pending
-
-Yellow
-
-Verified
-
-Blue
-
-Confirmed
-
-Cyan
-
-Processing
-
-Purple
-
-Packed
-
-Indigo
-
-Courier Assigned
-
-Orange
-
-Shipped
-
-Deep Orange
-
-Delivered
-
-Green
-
-Cancelled
-
-Red
-
-Returned
-
-Gray
-
-Employees should understand order status through color alone.
-
----
-
-# Priority Orders
-
-Orders marked as:
-
-Express Delivery
-
-High Value
-
-VIP Customer
-
-Repeat Customer
-
-Should display small badges beside the Order ID.
-
----
-
-# Fraud Indicator
-
-Potential fake orders should display a visible warning badge.
-
-Examples:
-
-⚠ Duplicate Phone
-
-⚠ Duplicate IP
-
-⚠ Too Many Orders
-
-⚠ Blacklisted Customer
-
-Employees can investigate before confirming.
-
----
-
-# Auto Refresh
-
-The order list should refresh automatically.
-
-Recommended interval:
-
-30 seconds
-
-Manual Refresh button should also exist.
-
----
-
-# Desktop Optimization
-
-The table should support:
-
-Resizable Columns
-
-Sortable Columns
-
-Sticky Header
-
-Horizontal Scroll
-
-Column Visibility
-
-Dense Mode
-
-Comfortable Mode
-
----
-
-# Mobile Optimization
-
-Replace the table with compact cards.
-
-Each card displays:
-
-Customer
-
-Phone
-
-Amount
-
-Items
-
-Status
-
-Quick Actions
-
-Tap to open full details.
-
----
-
-# Performance Goals
-
-The interface should comfortably handle:
-
-10,000+ Orders
-
-Without noticeable slowdown.
-
-Server-side pagination should be used.
-
-Searching and filtering should remain responsive.
-
----
-
-# UX Principles
-
-Employees should never feel lost.
-
-The interface should always answer:
-
-Who ordered?
-
-What did they order?
-
-How much?
-
-What is the current status?
-
-What should I do next?
-
-Within a few seconds.
-
----
-
-# Order Details Workspace
-
-The Order Details Workspace is the operational center for processing an individual order.
-
-Instead of opening multiple pages, employees should perform nearly every task from this workspace.
-
-The interface should present complete order information while remaining clean and easy to navigate.
-
----
-
-# Opening the Order
-
-Desktop
-
-Clicking an order should open a Right Side Drawer or Split View.
-
-The Order List remains visible.
-
-The employee never loses context.
-
-Mobile
-
-Clicking an order opens a Full Screen Order Details page.
-
----
-
-# Layout
-
-The workspace is divided into logical sections.
-
-──────────────────────────────────────
-
-Header
-
-Customer Information
-
-Delivery Information
-
-Products
-
-Payment
-
-Timeline
-
-Internal Notes
-
-Courier
-
-Activity Log
-
-Quick Actions
-
-──────────────────────────────────────
-
-Each section can collapse independently.
-
----
-
-# Header
-
-Display:
-
-Order ID
-
-Order Status
-
-Created Date
-
-Order Source
-
-Assigned Employee
-
-Fraud Score
-
-Priority Badge
-
-Buttons:
-
-Print Invoice
-
-Download PDF
-
-Copy Order Link
-
-Refresh
+- Order ID
+- Current Status
+- Order Source
+- Order Date
+- Last Updated
+- Payment Method
+- Payment Status
+- Total Quantity
+- Total Amount
+
+The current status should always remain visible at the top.
 
 ---
 
 # Customer Information
 
-Display:
+Display complete customer details.
 
-Customer Name
+Required fields:
 
-Phone Number
+- Full Name
+- Mobile Number
+- Alternative Number
+- Email Address
+- Complete Address
+- District
+- Area
+- Postal Code
 
-Alternative Phone
+Provide one-click actions:
 
-Email
+- Call Customer
+- WhatsApp Customer
+- Copy Phone Number
+- Copy Address
 
-Customer Since
-
-Total Previous Orders
-
-Lifetime Spending
-
-Last Order Date
-
-VIP Status
-
-Repeat Customer Badge
-
----
-
-# Customer Actions
-
-Available buttons:
-
-📞 Call
-
-💬 WhatsApp
-
-✉ Email
-
-📋 Copy Phone
-
-📋 Copy Email
-
-👤 Open Customer Profile
-
-Every action should complete in one click.
+Customer information should remain editable by authorized users.
 
 ---
 
-# Delivery Information
+# Ordered Products
 
-Display:
+Display every purchased item.
 
-Receiver Name
+Each product includes:
 
-Phone
+- Product Image
+- Product Name
+- SKU
+- Variant
+- Color
+- Size
+- Quantity
+- Unit Price
+- Discount
+- Total Price
 
-Division
-
-District
-
-Area
-
-Street Address
-
-Landmark
-
-Postal Code
-
-Delivery Notes
-
----
-
-# Address Actions
-
-Buttons:
-
-📍 Open Google Maps
-
-📋 Copy Address
-
-✏ Edit Address
-
-Save Changes
-
-Address editing requires confirmation.
-
----
-
-# Products Section
-
-Each ordered product is displayed as a separate card.
-
-Display:
-
-Product Image
-
-Product Name
-
-SKU
-
-Color
-
-Size
-
-Quantity
-
-Unit Price
-
-Discount
-
-Subtotal
-
-Current Stock
-
-Inventory Warning
-
----
-
-# Product Actions
-
-Buttons:
-
-Open Product
-
-Check Stock
-
-Replace Product (Admin Only)
-
-Edit Quantity
+Clicking a product opens Product Management.
 
 ---
 
@@ -1003,317 +554,416 @@ Edit Quantity
 
 Display:
 
-Payment Method
+- Payment Method
+- Payment Status
+- Transaction ID
+- Paid Amount
+- Remaining Amount
+- Discount Applied
+- Coupon Used
 
-Payment Status
-
-Subtotal
-
-Delivery Charge
-
-Coupon Discount
-
-VAT
-
-Grand Total
-
-Outstanding Balance
+Future payment gateways should automatically synchronize payment information.
 
 ---
 
-# COD Verification
+# Delivery Information
 
-If Cash On Delivery:
+Display:
 
-Display Verification Status.
+- Delivery Address
+- Delivery Instructions
+- Delivery Area
+- Delivery Charge
+- Estimated Delivery Time
 
-Statuses:
-
-Pending
-
-Verified
-
-Rejected
-
-Customer Confirmed
-
-Employees can update verification.
+Future versions may include map preview support.
 
 ---
 
-# Order Timeline
+# Courier Information
 
-Every event should appear automatically.
+Display:
 
-Example:
+- Courier Company
+- Booking Status
+- Tracking Number
+- Pickup Status
+- Delivery Status
+- Return Status
 
-10:21 AM
+Provide quick actions:
 
-Order Created
+- Create Booking
+- Track Shipment
+- Print Label
 
-↓
-
-10:25 AM
-
-Employee Viewed
-
-↓
-
-10:29 AM
-
-Customer Called
-
-↓
-
-10:34 AM
-
-Confirmed
-
-↓
-
-10:40 AM
-
-Courier Assigned
-
-↓
-
-12:15 PM
-
-Packed
-
-↓
-
-2:30 PM
-
-Shipped
-
-Timeline entries cannot be edited.
-
----
-
-# Internal Notes
-
-Employees can create private notes.
-
-Examples:
-
-Customer requested delivery after 6 PM.
-
-Requested black packaging.
-
-Asked to call before delivery.
-
-These notes are never visible to customers.
+Courier information should synchronize automatically whenever supported by the provider.
 
 ---
 
 # Employee Assignment
 
-Display:
-
-Assigned Employee
-
-Assignment Date
-
-Assign By
-
-Buttons:
-
-Assign
-
-Reassign
-
-Remove Assignment
-
-Only authorized users may change assignments.
-
----
-
-# Courier Section
+Every order can be assigned to an employee.
 
 Display:
 
-Courier Company
+- Assigned Employee
+- Assignment Date
+- Assignment Status
 
-Tracking Number
-
-Booking Status
-
-Pickup Status
-
-Estimated Delivery
-
-Delivery Charge
-
-Courier API Status
-
-Buttons:
-
-Assign Courier
-
-Generate Tracking
-
-Open Courier Dashboard
-
-Print Label
+Administrators may reassign orders whenever necessary.
 
 ---
 
-# Fraud Analysis
+# Internal Notes
 
-Display indicators:
+Internal notes are visible only to authorized employees.
 
-Duplicate Phone
+Examples:
 
-Duplicate Address
+- Customer requested evening delivery.
+- Customer confirmed address.
+- Waiting for payment confirmation.
+- Verify phone number before shipment.
 
-Duplicate IP
-
-Multiple Orders
-
-Blacklisted Customer
-
-Suspicious Activity
-
-Every warning should include a reason.
+Customers never see internal notes.
 
 ---
 
-# Customer History
+# Attachments
 
-Display previous orders.
+Support future file attachments.
 
-Columns:
+Examples:
 
-Order ID
+- Payment Screenshot
+- Invoice
+- Courier Receipt
+- Customer Documents
 
-Date
-
-Amount
-
-Status
-
-Payment
-
-Courier
-
-Employees should understand customer history instantly.
+Attachments should remain linked to the order permanently.
 
 ---
 
-# Order Attachments
-
-Support:
-
-Invoice PDF
-
-Customer Uploaded Files
-
-Payment Screenshots
-
-Custom Documents
+Status:
+Draft
 
 ---
 
-# Activity Log
+# Order Timeline
 
-Every action performed on this order should be recorded.
+Every order maintains a permanent chronological timeline.
+
+The timeline provides complete visibility into every action performed on the order.
+
+Timeline records cannot be manually deleted.
+
+Each event contains:
+
+- Date
+- Time
+- Employee Name
+- Action
+- Previous Status
+- New Status
+- Notes
+
+Example:
+
+09 Jul 2026 10:15 AM
+
+Order Created
+
+↓
+
+09 Jul 2026 10:32 AM
+
+Verified by Rahim
+
+↓
+
+09 Jul 2026 10:45 AM
+
+Confirmed
+
+↓
+
+09 Jul 2026 11:10 AM
+
+Courier Assigned
+
+↓
+
+09 Jul 2026 02:15 PM
+
+Shipped
+
+↓
+
+11 Jul 2026 04:32 PM
+
+Delivered
+
+The timeline should always appear in chronological order.
+
+---
+
+# Order Status Management
+
+Every order must have exactly one active status.
+
+Supported statuses include:
+
+- New Order
+- Pending Verification
+- Confirmed
+- Processing
+- Packed
+- Courier Assigned
+- Shipped
+- Out For Delivery
+- Delivered
+- Cancelled
+- Failed Delivery
+- Return Requested
+- Returned
+- Refunded
+- Exchanged
+
+Each status change automatically updates:
+
+- Timeline
+- Audit Log
+- Analytics
+- Employee Activity
+- Notifications
+
+---
+
+# Status Change Rules
+
+Not every status can transition to every other status.
+
+Examples:
+
+Pending Verification
+
+↓
+
+Confirmed
+
+OR
+
+Cancelled
+
+Confirmed
+
+↓
+
+Processing
+
+Processing
+
+↓
+
+Packed
+
+Packed
+
+↓
+
+Courier Assigned
+
+Courier Assigned
+
+↓
+
+Shipped
+
+Shipped
+
+↓
+
+Out For Delivery
+
+Out For Delivery
+
+↓
+
+Delivered
+
+Delivered
+
+↓
+
+Return Requested
+
+↓
+
+Returned
+
+↓
+
+Refunded
+
+Invalid status transitions must be blocked automatically.
+
+---
+
+# Confirm Order Workflow
+
+The standard confirmation workflow:
+
+1. Review customer information.
+2. Verify product availability.
+3. Contact customer if required.
+4. Confirm payment method.
+5. Confirm delivery address.
+6. Assign responsible employee.
+7. Change status to Confirmed.
+
+Confirmation automatically records:
+
+- Employee Name
+- Date
+- Time
+- Timeline Event
+- Audit Log
+
+---
+
+# Cancel Order Workflow
+
+Cancellation requires selecting a reason.
+
+Examples:
+
+- Customer Requested
+- Fake Order
+- Invalid Phone Number
+- Duplicate Order
+- Out of Stock
+- Address Not Serviceable
+- Payment Issue
+- Other
+
+The selected reason becomes part of the permanent order history.
+
+---
+
+# Failed Delivery Workflow
+
+If delivery fails:
+
+Status becomes:
+
+Failed Delivery
 
 Display:
 
-User
+- Failure Reason
+- Courier Note
+- Next Follow-up Date
 
-Action
+Available actions:
 
-Time
-
-Old Value
-
-New Value
-
-IP Address
-
-Device
-
-Logs cannot be deleted.
+- Retry Delivery
+- Change Address
+- Change Courier
+- Cancel Order
+- Mark Returned
 
 ---
 
-# Quick Action Panel
+# Return Workflow
 
-Fixed on the right side.
+Return requests include:
 
-Buttons:
+- Return Reason
+- Requested Date
+- Approval Status
+- Inspection Status
+- Refund Status
 
-Confirm Order
-
-Cancel Order
-
-Assign Courier
-
-Print Invoice
-
-Download Invoice
-
-Call Customer
-
-WhatsApp
-
-Send SMS
-
-Create Return
-
-Create Exchange
-
-Refund
-
-Generate Label
-
-Open Customer Profile
-
-All common actions should be accessible without scrolling.
+Every return request maintains its own timeline.
 
 ---
 
-# Auto Save
+# Exchange Workflow
 
-Internal notes and editable fields should save automatically after a short delay or explicit save action, preventing accidental data loss.
+Exchange orders remain linked to the original order.
 
----
+Display:
 
-# Performance Requirements
+- Original Order ID
+- Replacement Product
+- Exchange Status
+- Delivery Status
 
-Order Details should load in less than 2 seconds under normal conditions.
-
-Large orders containing many products should remain responsive.
-
-Images should load lazily where appropriate.
-
----
-
-# Success Criteria
-
-An employee should be able to understand an order, contact the customer, verify the order, assign a courier, print the invoice, and complete processing without leaving the Order Details Workspace.
+Complete exchange history should remain permanently accessible.
 
 ---
 
-# Fraud Prevention & Failed Order Recovery
+# Refund Workflow
+
+Refund information includes:
+
+- Refund Amount
+- Refund Method
+- Refund Status
+- Transaction Reference
+- Processed By
+- Refund Date
+
+Refunds should automatically update analytics.
+
+---
+
+# Audit Log
+
+Every important action creates an audit record.
+
+Audit entries include:
+
+- Employee
+- Action
+- Date
+- Time
+- Device
+- IP Address
+- Previous Value
+- Updated Value
+
+Audit records are read-only.
+
+They cannot be modified or deleted.
+
+---
+
+Status:
+Draft
+
+---
+
+# Fraud Prevention & Customer Verification
 
 Fraud prevention is a core responsibility of the Order Management module.
 
-The objective is not only to stop fake orders but also to reduce operational losses while protecting genuine customers.
+The system should automatically identify suspicious orders before they are confirmed.
 
-The system should automatically evaluate every order before employees begin processing it.
+The objective is to reduce fake orders, failed deliveries, unnecessary courier costs, and operational losses.
+
+The fraud detection system assists employees by providing risk indicators and recommendations.
+
+Employees always make the final decision.
 
 ---
 
-# Fraud Detection Engine
+# Fraud Risk Score
 
-Every incoming order should pass through the Fraud Detection Engine.
+Every new order receives a Fraud Risk Score.
 
-The engine evaluates multiple business rules and generates a Fraud Score.
-
-Fraud Score Levels
+Risk Levels:
 
 🟢 Low Risk
 
@@ -1323,426 +973,546 @@ Fraud Score Levels
 
 🔴 Critical Risk
 
-Employees immediately understand whether additional verification is required.
+The score should be calculated using configurable business rules.
 
----
-
-# Fraud Indicators
-
-Possible indicators include:
-
-- Same Phone Number
-- Same IP Address
-- Same Browser Fingerprint
-- Same Device
-- Same Delivery Address
-- Same Payment Pattern
-- Too Many Orders
-- Blacklisted Customer
-- Blacklisted Phone
-- Blacklisted Address
-- High Cancellation History
-- High Return Rate
-
-Each indicator increases the fraud score.
+Business owners may adjust rule weights from the Admin Panel.
 
 ---
 
 # Duplicate Phone Detection
 
-The system should detect:
+When a new order is received, the system checks:
 
-How many active orders already exist using the same phone number.
+- Existing phone number
+- Previous order history
+- Delivery success rate
+- Cancellation rate
+- Return history
+- Failed delivery history
 
 Display:
 
 Previous Orders
 
+Delivered Orders
+
 Cancelled Orders
 
 Returned Orders
 
-Pending Orders
+Last Order Date
 
-Delivered Orders
+Customer Lifetime Value
 
-Employees immediately understand customer history.
+Duplicate phone numbers should never block orders automatically.
+
+Instead, the system should display a warning.
+
+---
+
+# Duplicate Address Detection
+
+Detect repeated delivery addresses.
+
+Display:
+
+- Number of previous deliveries
+- Previous customers at the address
+- Delivery success rate
+- Failed deliveries
+- Returns
+
+Employees decide whether verification is required.
 
 ---
 
 # Duplicate IP Detection
 
-Store:
+When available, store:
 
-IP Address
+- IP Address
+- Device Type
+- Browser
+- Operating System
 
-Country
-
-City
-
-ISP
-
-Time
-
-If multiple suspicious orders originate from the same IP within a short period, display a warning.
+Display warnings if multiple suspicious orders originate from the same device or IP within a configurable time period.
 
 ---
 
-# Device Detection
+# COD Protection Rules
 
-Store:
+Business owners should configure COD protection rules.
 
-Device Type
+Examples:
 
-Operating System
+Maximum COD amount
 
-Browser
+Minimum COD amount
 
-Screen Resolution (optional)
+Restricted delivery areas
 
-Language
+High-risk districts
 
-Timezone
+Manual verification required
 
-Future browser fingerprint identifier
+Customer verification required
 
-This helps identify repeated fake orders.
+Rules should be configurable without modifying source code.
 
 ---
 
-# Order Rate Limiting
+# 24-Hour Order Protection
 
-The business owner can configure limits.
+To reduce fake orders, the system supports configurable order limits.
+
+Example Rule:
+
+A customer may place a maximum number of COD orders within a rolling 24-hour period.
+
+If the limit is exceeded:
+
+- Prevent additional checkout
+- Display a friendly explanation
+- Show the business support phone number
+- Encourage the customer to contact support if the new order is legitimate
+
+The order limit and time window must be configurable from the Admin Panel.
+
+---
+
+# Friendly Customer Message
+
+When checkout is temporarily restricted, customers should receive a clear and respectful message.
 
 Example:
 
-Maximum Orders
+"We've noticed multiple recent orders from your account. To protect both our customers and our delivery process, additional COD orders are temporarily unavailable. Please contact our support team if you need immediate assistance."
 
-3
-
-Time Window
-
-24 Hours
-
-If exceeded:
-
-Reject new order.
+The exact wording should be editable from the Admin Panel.
 
 ---
 
-# Block Popup
+# Blacklist Management
 
-Instead of silently rejecting an order, display a professional popup.
+Administrators may blacklist:
 
-Example
+- Phone Numbers
+- Customers
+- Addresses
+- Devices
+- IP Addresses
 
-"We noticed multiple recent orders from this device.
+Blacklist entries require:
 
-If you would like to place another order, please contact our support team.
+Reason
 
-Phone:
+Created By
 
-018XXXXXXXX
+Created Date
 
-WhatsApp
+Expiry Date (Optional)
 
-Live Chat
+Notes
 
-Thank you for understanding."
-
-Popup content should be editable from the Admin Panel.
+Blacklist actions should be fully logged.
 
 ---
 
-# Fraud Rules
+# Verification Checklist
 
-Business owners should configure rules without editing code.
+Employees may complete a verification checklist before confirming high-risk orders.
 
 Examples:
 
-Maximum Orders Per Phone
+☐ Phone Verified
 
-Maximum Orders Per IP
+☐ Address Verified
 
-Maximum Orders Per Address
+☐ Customer Confirmed
 
-Maximum COD Orders
+☐ Product Available
 
-Maximum Failed Deliveries
+☐ COD Approved
 
-Maximum Cancelled Orders
+☐ Fraud Warning Reviewed
 
-Maximum Returned Orders
-
-Every rule should be configurable.
+Checklist templates should be configurable.
 
 ---
 
-# Temporary Blocking
+# Customer Communication
 
-Instead of permanent blocking, support:
+The Order Details panel should provide one-click communication.
 
-1 Hour
+Available actions:
 
-6 Hours
+📞 Call Customer
 
-12 Hours
+💬 WhatsApp
 
-24 Hours
+📧 Email
 
-7 Days
+📱 SMS (Future)
 
-Permanent
-
-Each rule is configurable.
-
----
-
-# Blacklist
-
-The Admin Panel should support blacklists.
-
-Blacklist Types
-
-Phone Number
-
-Customer
-
-IP Address
-
-Email
-
-Delivery Address
-
-Browser Fingerprint (future)
-
-Blocked customers cannot place new orders.
-
----
-
-# Whitelist
-
-Trusted customers should bypass certain fraud checks.
-
-Examples:
-
-VIP Customers
-
-Corporate Clients
-
-Internal Testing Accounts
-
----
-
-# Manual Override
-
-Super Admin may manually approve blocked orders.
-
-Every override is recorded.
-
----
-
-# Fraud Notes
-
-Employees may add fraud investigation notes.
-
-Examples:
-
-Repeated fake orders.
-
-Customer confirmed by phone.
-
-Duplicate address but genuine customer.
-
-Notes remain internal.
-
----
-
-# Failed Order Recovery
-
-A failed order is any checkout session where the customer entered meaningful information but did not successfully place the order.
-
-This feature helps recover lost sales.
-
----
-
-# Failed Order Capture
-
-Capture information only after the customer has entered sufficient checkout details, such as:
-
-Name
-
-Phone Number
-
-Address
-
-Cart Contents
-
-Delivery Area
-
-The system should avoid storing accidental or incomplete sessions.
-
----
-
-# Failed Order List
+Communication history should remain attached to the order.
 
 Display:
 
-Customer Name
-
-Phone Number
-
-Products
-
-Cart Value
-
-Last Activity
-
-Time
-
-Order Source
-
-Device
-
-Browser
-
-Recovery Status
+- Date
+- Time
+- Employee
+- Communication Type
+- Notes
 
 ---
 
-# Recovery Actions
+# Failed Checkout Tracking
 
-Employees may:
+The platform should record checkout sessions that were abandoned before order completion.
 
-Call Customer
+Captured information may include:
 
-WhatsApp Customer
+- Customer Name
+- Phone Number
+- Cart Items
+- Order Value
+- Checkout Stage
+- Timestamp
 
-Send SMS
-
-Open Checkout Link
-
-Mark Recovered
-
-Mark Not Interested
-
-Add Internal Note
+Business owners may review these records for recovery campaigns.
 
 ---
 
-# Recovery Status
+# Recovery Center
 
-Possible values:
+Employees may attempt to recover abandoned checkouts.
 
-Pending
+Available actions:
 
-Contacted
+- Call Customer
+- Send WhatsApp
+- Send Email
+- Apply Discount (Future)
 
-Interested
-
-Recovered
-
-Not Interested
-
-Duplicate
-
-Spam
-
-Recovered orders should link to the final completed order.
+Recovery results should be recorded for analytics.
 
 ---
 
-# Recovery Analytics
+# AI Fraud Assistant (Future Ready)
 
-Display:
+Future AI services may recommend:
 
-Recovery Rate
+- Verify this customer before confirmation.
+- Possible duplicate customer detected.
+- High risk of delivery failure.
+- Previous return history is unusually high.
+- Manual review recommended.
 
-Recovered Revenue
+AI recommendations should never execute actions automatically.
 
-Lost Revenue
-
-Average Recovery Time
-
-Employee Recovery Performance
-
-These reports help improve marketing and operations.
-
----
-
-# Employee Fraud Dashboard
-
-Each employee should see:
-
-Suspicious Orders
-
-Blocked Orders
-
-High Risk Orders
-
-Recovery Queue
-
-Verification Queue
-
-This allows operational teams to focus on important tasks.
-
----
-
-# AI Ready
-
-Future AI models may analyze:
-
-Order behaviour
-
-Customer behaviour
-
-Cancellation probability
-
-Return probability
-
-Fraud probability
-
-Recommended verification actions
-
-The architecture should reserve support for future machine learning services.
+The final decision always belongs to authorized employees.
 
 ---
 
 # Success Criteria
 
-The fraud prevention system should reduce fake orders while maintaining a smooth experience for genuine customers.
+The fraud prevention system should significantly reduce fake orders while maintaining a positive customer experience.
 
-Business owners should configure fraud rules entirely from the Admin Panel without modifying source code.
+Legitimate customers should never feel unfairly blocked, and employees should receive enough information to make confident verification decisions.
 
 ---
 
-# Courier Operations Center
+# Employee Workspace
 
-The Courier Operations Center is responsible for managing every delivery after an order has been confirmed.
+The Employee Workspace is designed to maximize operational efficiency.
 
-The objective is to eliminate manual courier management while providing complete visibility over shipment status.
+Employees should spend their time processing orders rather than navigating between pages.
 
-The module should support multiple courier providers simultaneously.
+The interface must prioritize speed, clarity, and minimal clicks.
+
+---
+
+# Pending Order Queue
+
+The Pending Order Queue is the default workspace for order processing employees.
+
+The queue displays only the most important information required to identify and prioritize orders.
+
+Each row should remain compact.
+
+Display:
+
+- Order ID
+- Customer Name
+- Phone Number
+- Product Count
+- Total Quantity
+- Grand Total
+- Order Time
+- Current Status
+- Fraud Risk Indicator
+- Priority Indicator
+
+Rows should never display excessive information.
+
+---
+
+# Opening an Order
+
+Clicking any row opens the Order Details Panel.
+
+The employee should never lose the current queue position.
+
+After closing the panel, the employee returns to exactly the same location in the list.
+
+---
+
+# Live Queue Updates
+
+The queue should update automatically.
+
+Examples:
+
+- New Order Received
+- Order Confirmed
+- Order Cancelled
+- Employee Assignment
+- Courier Assigned
+
+Updates should occur without refreshing the page whenever technically appropriate.
+
+---
+
+# Priority Levels
+
+Orders may receive operational priorities.
+
+Levels:
+
+🔴 Critical
+
+🟠 High
+
+🟡 Normal
+
+🟢 Low
+
+Priority may be determined manually or automatically using business rules.
+
+Examples:
+
+- Express Delivery
+- VIP Customer
+- High Order Value
+- Repeat Customer
+- Manual Escalation
+
+---
+
+# SLA Timer
+
+Every pending order displays a processing timer.
+
+Example:
+
+00:04
+
+00:12
+
+00:27
+
+00:41
+
+Color Guidelines:
+
+Green
+
+Within target time.
+
+Yellow
+
+Approaching SLA limit.
+
+Orange
+
+Needs attention.
+
+Red
+
+SLA exceeded.
+
+Timer thresholds must be configurable.
+
+---
+
+# Auto Escalation
+
+If an order remains unprocessed beyond the configured SLA:
+
+The system may automatically:
+
+- Notify Assigned Employee
+- Notify Team Leader
+- Notify Administrator
+- Increase Priority
+- Add Dashboard Alert
+
+Escalation rules should be configurable.
+
+---
+
+# Employee Assignment
+
+Orders may be:
+
+- Automatically Assigned
+- Manually Assigned
+- Reassigned
+
+Display:
+
+Assigned Employee
+
+Assignment Time
+
+Assigned By
+
+Assignment History
+
+Every reassignment must be recorded.
+
+---
+
+# Quick Actions
+
+Without opening the full details panel, employees may perform selected actions.
+
+Examples:
+
+- Assign Employee
+- Add Internal Note
+- Print Invoice
+- Copy Order ID
+- Copy Customer Number
+
+Actions that modify customer data require opening the full details panel.
+
+---
+
+# Internal Notes
+
+Employees may create operational notes.
+
+Examples:
+
+"Customer requested evening delivery."
+
+"Address confirmed."
+
+"Waiting for payment verification."
+
+"Customer requested blue color."
+
+Every note contains:
+
+- Author
+- Date
+- Time
+- Content
+
+Notes are visible only to authorized staff.
+
+---
+
+# Customer Contact
+
+The Order Details panel should always provide one-click communication.
+
+Available actions:
+
+📞 Call
+
+💬 WhatsApp
+
+📧 Email
+
+Future:
+
+📱 SMS
+
+Every communication may optionally be logged.
+
+---
+
+# Team Performance
+
+Managers should monitor employee productivity.
+
+Display:
+
+- Orders Processed
+- Average Processing Time
+- Pending Orders
+- Confirmation Rate
+- Cancellation Rate
+- Recovery Rate
+
+Performance metrics should update automatically.
+
+---
+
+# Queue Performance
+
+Operational metrics include:
+
+Average Waiting Time
+
+Average Confirmation Time
+
+Average Processing Time
+
+Orders Waiting Beyond SLA
+
+Queue Length
+
+Employee Workload
+
+These metrics help managers balance operational resources.
+
+---
+
+# Success Criteria
+
+Employees should be able to process a high volume of daily orders with minimal navigation while managers maintain complete visibility into operational performance and service quality.
+
+
+---
+
+# Courier Management
+
+Courier Management is responsible for preparing, dispatching, tracking, and completing every shipment.
+
+The system should support multiple courier providers through a unified interface.
+
+Business owners should be able to change courier providers without changing operational workflows.
 
 ---
 
 # Supported Courier Providers
 
-Initially supported:
+The architecture should support multiple courier integrations.
 
-- SteadFast
+Initial providers may include:
+
+- Steadfast
 - RedX
 - Pathao Courier
 - Paperfly
 - eCourier
-- Sundarban Courier
-
-Future support:
-
+- Sundarban
 - Custom Courier API
-- International Shipping Providers
 
-Business owners should enable or disable courier providers from the Integration Center.
+Future courier providers should be installable as plugins.
 
 ---
 
@@ -1750,916 +1520,583 @@ Business owners should enable or disable courier providers from the Integration 
 
 Orders may be assigned:
 
-Automatically
+- Automatically
+- Manually
 
-or
+Automatic assignment should follow configurable business rules.
 
-Manually
+Example:
 
-Automatic assignment rules may consider:
+IF
 
-- Customer location
-- Delivery charge
-- Courier coverage
-- Delivery performance
-- Courier availability
+District = Dhaka
 
-Manual assignment should always remain available.
+AND
 
----
+Weight < 2kg
 
-# Courier Information
+THEN
 
-Each order should store:
+Use Steadfast
 
-Courier Name
+Another example:
 
-Tracking Number
+IF
 
-Booking ID
+District = Chattogram
 
-Booking Date
+THEN
 
-Pickup Status
+Use RedX
 
-Delivery Status
-
-Estimated Delivery Date
-
-Delivery Charge
-
-Courier Notes
-
----
-
-# Courier Dashboard
-
-Display:
-
-Pending Courier Booking
-
-Booked Orders
-
-Pickup Pending
-
-Picked Up
-
-In Transit
-
-Out For Delivery
-
-Delivered
-
-Delivery Failed
-
-Returned To Merchant
+Business owners should configure these rules from the Admin Panel.
 
 ---
 
 # Courier Booking
 
-Employees should be able to create courier bookings directly from the order.
+Employees should create courier bookings directly from the Order Details panel.
 
-One Click Booking
+Required booking information:
 
-↓
+- Customer Name
+- Phone Number
+- Delivery Address
+- Product Weight
+- Package Type
+- COD Amount
+- Delivery Charge
 
-Courier API
-
-↓
-
-Tracking Number Generated
-
-↓
-
-Order Updated Automatically
-
-No duplicate booking should be allowed.
+The system should submit booking requests to the selected courier provider.
 
 ---
 
-# Bulk Courier Booking
+# Booking Status
 
-Employees may select multiple orders.
+Supported booking statuses:
 
-Supported bulk actions:
+- Not Booked
+- Booking Requested
+- Booking Successful
+- Pickup Scheduled
+- Pickup Completed
+- Booking Failed
 
-Generate Courier Booking
-
-Print Labels
-
-Print Manifests
-
-Download Booking List
-
-Export Courier Sheet
+Booking failures should display clear error messages.
 
 ---
 
-# Courier Labels
+# Tracking Information
 
-Generate:
-
-Shipping Label
-
-Barcode
-
-QR Code
-
-Courier Sticker
-
-Labels should support:
-
-A4 Printing
-
-Thermal Printing
-
-Future Zebra Printers
-
----
-
-# Tracking
-
-Tracking should update automatically.
-
-Statuses:
-
-Booked
-
-Picked Up
-
-Hub Processing
-
-In Transit
-
-Out For Delivery
-
-Delivered
-
-Returned
-
-Failed Delivery
-
-Updates should appear inside the Order Timeline.
-
----
-
-# Manual Tracking Update
-
-If API is unavailable:
-
-Employees may manually update courier status.
-
-Every manual change should be logged.
-
----
-
-# Delivery Failure
-
-Reasons may include:
-
-Customer Unavailable
-
-Wrong Address
-
-Phone Unreachable
-
-Customer Refused
-
-Courier Issue
-
-Weather
-
-Other
-
-Employees should select a reason before marking delivery as failed.
-
----
-
-# Reattempt Delivery
-
-Support:
-
-First Attempt
-
-Second Attempt
-
-Final Attempt
-
-Maximum attempts should be configurable.
-
----
-
-# Return To Merchant (RTM)
+Every shipment should maintain tracking information.
 
 Display:
 
-RTM Requested
+- Tracking Number
+- Courier Name
+- Pickup Date
+- Current Shipment Status
+- Expected Delivery Date
+- Last Tracking Update
 
-RTM Picked Up
+Tracking information should synchronize automatically whenever supported.
 
-RTM In Transit
+---
 
-RTM Received
+# Shipment Status
 
-Returned products should update inventory only after inspection.
+Supported shipment statuses:
+
+- Awaiting Pickup
+- Picked Up
+- In Transit
+- Hub Processing
+- Out For Delivery
+- Delivered
+- Delivery Failed
+- Returned To Merchant
+
+Shipment updates automatically create timeline events.
+
+---
+
+# Label Printing
+
+Employees should generate printable shipping labels.
+
+Labels may include:
+
+- Customer Information
+- Order ID
+- Tracking Number
+- Courier Name
+- COD Amount
+- QR Code
+- Barcode
+
+Future courier plugins may provide courier-specific label templates.
+
+---
+
+# Pickup Scheduling
+
+Employees may request courier pickup.
+
+Display:
+
+- Pickup Date
+- Pickup Time
+- Assigned Courier
+- Pickup Status
+
+Future integrations may support automatic pickup scheduling.
+
+---
+
+# Delivery Monitoring
+
+Managers should monitor active deliveries.
+
+Dashboard metrics include:
+
+- Orders Awaiting Pickup
+- Orders In Transit
+- Delivered Today
+- Failed Deliveries
+- Returned Shipments
+- Average Delivery Time
+
+---
+
+# COD Collection
+
+Display:
+
+- Total COD Amount
+- Collected Amount
+- Pending Collection
+- Courier Settlement Status
+- Settlement Date
+
+Finance reports should synchronize automatically.
 
 ---
 
 # Courier Performance
 
-Analytics:
-
-Average Delivery Time
-
-Successful Deliveries
-
-Failed Deliveries
-
-Return Rate
-
-Average Cost
-
-Delivery Success %
-
-These reports help choose the best courier.
-
----
-
-# Courier Notes
-
-Employees may add courier-specific notes.
-
-Examples:
-
-Handle with care.
-
-Customer requested evening delivery.
-
-Call before delivery.
-
-Notes may optionally be shared with the courier.
-
----
-
-# Courier API Health
+Measure courier performance.
 
 Display:
 
-API Status
+- Delivery Success Rate
+- Average Delivery Time
+- Return Rate
+- Failed Delivery Rate
+- COD Settlement Time
+- Customer Satisfaction (Future)
 
-Authentication Status
-
-Response Time
-
-Today's Requests
-
-Failed Requests
-
-Webhook Status
-
-Admins should immediately know if courier integration is experiencing issues.
-
----
-
-# Delivery Notifications
-
-Automatic notifications may be sent when:
-
-Courier Assigned
-
-Package Picked Up
-
-Out For Delivery
-
-Delivered
-
-Returned
-
-Notification channels:
-
-SMS
-
-WhatsApp
-
-Email
-
-Push Notification (Future)
+Managers should compare courier providers using these metrics.
 
 ---
 
 # Courier Rules
 
-Business owners should configure:
+Business owners may configure:
 
-Default Courier
+- Preferred Courier
+- Backup Courier
+- Delivery Area Restrictions
+- COD Limits
+- Weight Limits
+- Package Type Rules
 
-Free Shipping Threshold
+Rules should remain configurable without modifying source code.
 
-COD Availability
+---
 
-District Restrictions
+# Courier Timeline
 
-Courier Priority
+Every courier event should be recorded.
 
-Holiday Rules
+Examples:
 
-No code changes should be required.
+Booking Created
+
+↓
+
+Pickup Scheduled
+
+↓
+
+Package Collected
+
+↓
+
+Shipment In Transit
+
+↓
+
+Delivered
+
+Every event stores:
+
+- Date
+- Time
+- Source
+- Employee (if applicable)
+
+---
+
+# Future Expansion
+
+Future versions may support:
+
+- Automatic Courier Selection using AI
+- Delivery Time Prediction
+- Courier Cost Optimization
+- Multi-package Shipments
+- International Shipping
+- Warehouse Routing
+- Live Delivery Map
 
 ---
 
 # Success Criteria
 
-Employees should manage the complete shipping lifecycle from within the Order Management module without logging into external courier dashboards for routine operations.
+Courier Management should allow employees to prepare, dispatch, monitor, and complete shipments efficiently while giving business owners complete visibility into courier performance and delivery operations.
 
 
 ---
 
-# Invoice & Document Center
+# Courier Management
 
-The Invoice & Document Center manages every printable and downloadable document related to an order.
+Courier Management is responsible for preparing, dispatching, tracking, and completing every shipment.
 
-The objective is to provide professional, branded, and legally compliant business documents while minimizing manual work.
+The system should support multiple courier providers through a unified interface.
 
-Every document should be generated dynamically using the latest order information.
-
----
-
-# Supported Documents
-
-The system should generate:
-
-- Invoice
-- Tax Invoice (Future)
-- Packing Slip
-- Shipping Label
-- Courier Label
-- Delivery Slip
-- Return Slip
-- Exchange Slip
-- Refund Receipt
-- Cash Collection Sheet
-- Order Summary
-- Picking List
-
-All documents should be available from the Order Details page.
+Business owners should be able to change courier providers without changing operational workflows.
 
 ---
 
-# Invoice Layout
+# Supported Courier Providers
 
-The invoice should maintain a premium appearance.
+The architecture should support multiple courier integrations.
 
-Display:
+Initial providers may include:
 
-Company Logo
+- Steadfast
+- RedX
+- Pathao Courier
+- Paperfly
+- eCourier
+- Sundarban
+- Custom Courier API
 
-Company Information
-
-Invoice Number
-
-Invoice Date
-
-Order Number
-
-Customer Information
-
-Shipping Address
-
-Billing Address
-
-Payment Method
-
-Courier
-
-Products
-
-Summary
-
-Grand Total
-
-Terms & Conditions
-
-QR Code
-
-Barcode
-
-Company Footer
+Future courier providers should be installable as plugins.
 
 ---
 
-# Invoice Number Format
+# Courier Assignment
 
-Business owners should configure:
+Orders may be assigned:
 
-Prefix
+- Automatically
+- Manually
+
+Automatic assignment should follow configurable business rules.
 
 Example:
 
-ARV-2026-000001
+IF
 
-Supported options:
+District = Dhaka
 
-Year
+AND
 
-Month
+Weight < 2kg
 
-Day
+THEN
 
-Running Number
+Use Steadfast
 
-Custom Prefix
+Another example:
 
-Automatic Reset Rules
+IF
+
+District = Chattogram
+
+THEN
+
+Use RedX
+
+Business owners should configure these rules from the Admin Panel.
+
+---
+
+# Courier Booking
+
+Employees should create courier bookings directly from the Order Details panel.
+
+Required booking information:
+
+- Customer Name
+- Phone Number
+- Delivery Address
+- Product Weight
+- Package Type
+- COD Amount
+- Delivery Charge
+
+The system should submit booking requests to the selected courier provider.
+
+---
+
+# Booking Status
+
+Supported booking statuses:
+
+- Not Booked
+- Booking Requested
+- Booking Successful
+- Pickup Scheduled
+- Pickup Completed
+- Booking Failed
+
+Booking failures should display clear error messages.
+
+---
+
+# Tracking Information
+
+Every shipment should maintain tracking information.
+
+Display:
+
+- Tracking Number
+- Courier Name
+- Pickup Date
+- Current Shipment Status
+- Expected Delivery Date
+- Last Tracking Update
+
+Tracking information should synchronize automatically whenever supported.
+
+---
+
+# Shipment Status
+
+Supported shipment statuses:
+
+- Awaiting Pickup
+- Picked Up
+- In Transit
+- Hub Processing
+- Out For Delivery
+- Delivered
+- Delivery Failed
+- Returned To Merchant
+
+Shipment updates automatically create timeline events.
+
+---
+
+# Label Printing
+
+Employees should generate printable shipping labels.
+
+Labels may include:
+
+- Customer Information
+- Order ID
+- Tracking Number
+- Courier Name
+- COD Amount
+- QR Code
+- Barcode
+
+Future courier plugins may provide courier-specific label templates.
+
+---
+
+# Pickup Scheduling
+
+Employees may request courier pickup.
+
+Display:
+
+- Pickup Date
+- Pickup Time
+- Assigned Courier
+- Pickup Status
+
+Future integrations may support automatic pickup scheduling.
+
+---
+
+# Delivery Monitoring
+
+Managers should monitor active deliveries.
+
+Dashboard metrics include:
+
+- Orders Awaiting Pickup
+- Orders In Transit
+- Delivered Today
+- Failed Deliveries
+- Returned Shipments
+- Average Delivery Time
+
+---
+
+# COD Collection
+
+Display:
+
+- Total COD Amount
+- Collected Amount
+- Pending Collection
+- Courier Settlement Status
+- Settlement Date
+
+Finance reports should synchronize automatically.
+
+---
+
+# Courier Performance
+
+Measure courier performance.
+
+Display:
+
+- Delivery Success Rate
+- Average Delivery Time
+- Return Rate
+- Failed Delivery Rate
+- COD Settlement Time
+- Customer Satisfaction (Future)
+
+Managers should compare courier providers using these metrics.
+
+---
+
+# Courier Rules
+
+Business owners may configure:
+
+- Preferred Courier
+- Backup Courier
+- Delivery Area Restrictions
+- COD Limits
+- Weight Limits
+- Package Type Rules
+
+Rules should remain configurable without modifying source code.
+
+---
+
+# Courier Timeline
+
+Every courier event should be recorded.
 
 Examples:
 
-Every Year
+Booking Created
 
-Every Month
+↓
 
-Never Reset
+Pickup Scheduled
 
----
+↓
 
-# Company Branding
+Package Collected
 
-The invoice should automatically display:
+↓
 
-Company Logo
+Shipment In Transit
 
-Business Name
+↓
 
-Trade License Number
+Delivered
 
-BIN (Optional)
+Every event stores:
 
-TIN (Optional)
-
-Support Phone
-
-Support Email
-
-Website
-
-Social Media
-
-All branding should be configurable from the Admin Panel.
+- Date
+- Time
+- Source
+- Employee (if applicable)
 
 ---
 
-# Customer Information
-
-Display:
-
-Customer Name
-
-Phone Number
-
-Delivery Address
-
-District
-
-Division
-
-Postal Code
-
-Delivery Notes
-
-Customer information should always appear clearly.
-
----
-
-# Product Table
-
-Display:
-
-Product Image
-
-Product Name
-
-SKU
-
-Variant
-
-Quantity
-
-Unit Price
-
-Discount
-
-Subtotal
-
-Products should automatically wrap to multiple pages if necessary.
-
----
-
-# Order Summary
-
-Display:
-
-Subtotal
-
-Discount
-
-Coupon
-
-Shipping Charge
-
-VAT (Future)
-
-Grand Total
-
-Amount Paid
-
-Amount Due
-
----
-
-# Payment Section
-
-Display:
-
-Payment Method
-
-COD Status
-
-Transaction ID
-
-Payment Status
-
-Payment Date
-
-Future payment gateway information should appear automatically.
-
----
-
-# QR Code
-
-Generate a QR Code for:
-
-Order Verification
-
-Invoice Verification
-
-Order Tracking
-
-The QR destination should be configurable.
-
----
-
-# Barcode
-
-Generate an Order Barcode.
-
-Supported formats:
-
-Code128
-
-EAN13 (Future)
-
-QR Barcode (Future)
-
----
-
-# Digital Signature
-
-Future support:
-
-Authorized Signature
-
-Customer Signature
-
-Courier Signature
-
-Electronic Approval
-
----
-
-# Packing Slip
-
-Packing Slip should display:
-
-Order Number
-
-Customer Name
-
-Address
-
-Products
-
-Quantity
-
-Warehouse Notes
-
-No pricing information should be shown.
-
----
-
-# Shipping Label
-
-Shipping Labels should contain:
-
-Receiver
-
-Phone
-
-Address
-
-Courier
-
-Tracking Number
-
-Barcode
-
-QR Code
-
-Fragile Label (Optional)
-
-COD Amount
-
----
-
-# Return Slip
-
-Display:
-
-Original Order Number
-
-Customer Information
-
-Reason
-
-Return Date
-
-Inspection Notes
-
-Employee Signature
-
----
-
-# Exchange Slip
-
-Display:
-
-Original Product
-
-Replacement Product
-
-Difference Amount
-
-Reason
-
-Approval
-
----
-
-# Refund Receipt
-
-Display:
-
-Refund ID
-
-Refund Amount
-
-Refund Method
-
-Refund Date
-
-Approved By
-
-Customer Signature (Future)
-
----
-
-# Cash Collection Sheet
-
-For COD businesses.
-
-Display:
-
-Order Number
-
-Customer
-
-Courier
-
-Amount
-
-Collection Status
-
-Reconciliation Status
-
-Useful for finance teams.
-
----
-
-# Printing Options
-
-Supported:
-
-A4 Portrait
-
-A4 Landscape
-
-Thermal Printer (80mm)
-
-Thermal Printer (58mm)
-
-Future Zebra Printer
-
-Print Preview should always be available.
-
----
-
-# PDF Export
-
-Generate high-quality PDF files.
-
-Support:
-
-Download
-
-Email
-
-WhatsApp
-
-Archive
-
-Password Protection (Future)
-
----
-
-# Email Invoice
-
-Employees may send invoices directly.
-
-Supported providers:
-
-SMTP
-
-Resend
-
-SendGrid
-
-Mailgun
-
-Future providers may be added.
-
----
-
-# WhatsApp Invoice
-
-Generate a secure invoice link.
-
-Send directly to:
-
-WhatsApp
-
-Messenger (Future)
-
-SMS Link
-
----
-
-# Invoice Templates
-
-The Admin Panel should support multiple invoice templates.
-
-Examples:
-
-Classic
-
-Modern
-
-Minimal
-
-Premium
-
-Corporate
-
-Owners should switch templates without editing code.
-
----
-
-# Watermark
-
-Optional watermark support.
-
-Examples:
-
-PAID
-
-UNPAID
-
-DRAFT
-
-COPY
-
-Cancelled
-
-Returned
-
----
-
-# Language Support
-
-Invoices should support:
-
-English
-
-Bangla
-
-Bilingual
-
-Language selection should be configurable.
-
----
-
-# Archive
-
-Every generated document should be archived.
-
-Admins should re-download documents at any time.
-
-Previous versions should remain available for audit purposes.
-
----
-
-# Security
-
-Invoices should include:
-
-Unique Verification ID
-
-QR Verification
-
-Digital Hash (Future)
-
-Download Log
-
-Tamper Detection (Future)
+# Future Expansion
+
+Future versions may support:
+
+- Automatic Courier Selection using AI
+- Delivery Time Prediction
+- Courier Cost Optimization
+- Multi-package Shipments
+- International Shipping
+- Warehouse Routing
+- Live Delivery Map
 
 ---
 
 # Success Criteria
 
-Every order-related document should be generated instantly, maintain a premium appearance, support business branding, and require zero manual editing before printing or sharing.
----
-
-# Order Analytics & Employee Performance
-
-The Order Analytics & Employee Performance module transforms operational data into actionable business insights.
-
-Its purpose is to help business owners understand not only what happened, but also why it happened and how to improve future performance.
-
-Every important operational event should be measurable.
+Courier Management should allow employees to prepare, dispatch, monitor, and complete shipments efficiently while giving business owners complete visibility into courier performance and delivery operations.
 
 ---
 
-# Business Dashboard
+# Reports & Analytics
 
-Display real-time metrics:
+The Reports & Analytics section transforms operational order data into meaningful business intelligence.
 
-Today's Orders
+The purpose is not only to display statistics but to help business owners understand business performance, identify operational bottlenecks, and make informed decisions.
 
-Today's Revenue
+Every report should support filtering, exporting, scheduling, and future AI analysis.
 
-Today's Profit (Future)
+---
 
-Pending Orders
+# Dashboard Reports
 
-Delivered Orders
+Display real-time operational reports.
 
-Cancelled Orders
+Default reports include:
 
-Returned Orders
+- Today's Orders
+- Today's Revenue
+- Pending Orders
+- Delivered Orders
+- Cancelled Orders
+- Failed Deliveries
+- Returns
+- Refunds
+- Exchange Requests
+- Average Order Value
 
-Exchange Orders
+Users should switch between:
 
-Refund Requests
+Today
 
-Failed Orders
+Yesterday
 
-Recovery Orders
+Last 7 Days
 
-Average Order Value
+Last 30 Days
 
-Average Processing Time
+This Month
 
-Repeat Customer %
+This Year
 
-New Customer %
-
-COD %
-
-Online Payment %
+Custom Date Range
 
 ---
 
 # Sales Analytics
 
-Charts:
+Display interactive charts.
+
+Examples:
 
 Daily Sales
 
@@ -2669,249 +2106,103 @@ Monthly Sales
 
 Yearly Sales
 
-Category Performance
+Revenue Trend
 
-Product Performance
+Order Trend
 
-Sales by District
+Average Order Value
 
-Sales by Courier
+Repeat Customer Revenue
 
-Sales by Employee
+Cancelled Order Rate
 
-Sales by Marketing Source
+Delivery Success Rate
+
+Charts should support comparison mode.
+
+Example:
+
+This Month vs Last Month
 
 ---
 
-# Employee Performance
-
-Each employee should have an individual performance dashboard.
+# Customer Analytics
 
 Display:
 
-Orders Assigned
+New Customers
+
+Returning Customers
+
+VIP Customers
+
+Repeat Purchase Rate
+
+Average Customer Value
+
+Customer Lifetime Value (Future)
+
+Top Spending Customers
+
+Inactive Customers
+
+Geographic Distribution
+
+---
+
+# Product Analytics
+
+Display:
+
+Best Selling Products
+
+Worst Selling Products
+
+Highest Revenue Products
+
+Highest Return Products
+
+Out of Stock Products
+
+Fast Moving Products
+
+Slow Moving Products
+
+Category Performance
+
+---
+
+# Employee Analytics
+
+Managers should evaluate employee performance.
+
+Display:
+
+Orders Processed
 
 Orders Confirmed
 
 Orders Cancelled
 
-Orders Delivered
-
-Recovery Calls
-
-Recovery Success
-
-Customer Calls
-
-Average Response Time
-
 Average Confirmation Time
 
 Average Processing Time
 
-Shift Hours
-
-Login Time
-
-Logout Time
+Customer Recovery Success
 
 Productivity Score
 
----
+Leaderboard
 
-# Employee Leaderboard
+The leaderboard supports:
 
-Display rankings.
+Daily
 
-Example:
+Weekly
 
-🥇 Rahim
+Monthly
 
-Confirmed Orders
-
-325
-
-Accuracy
-
-98%
-
-Average Time
-
-2 min
-
-----------------------------
-
-🥈 Karim
-
-Confirmed Orders
-
-301
-
-Accuracy
-
-97%
-
-Average Time
-
-3 min
-
-----------------------------
-
-🥉 Sakib
-
-Confirmed Orders
-
-284
-
-Accuracy
-
-96%
-
-Average Time
-
-4 min
-
-Leaderboard periods:
-
-Today
-
-This Week
-
-This Month
-
-Custom Date
-
----
-
-# Employee Activity Timeline
-
-Track:
-
-Login
-
-Logout
-
-Viewed Order
-
-Confirmed Order
-
-Cancelled Order
-
-Assigned Courier
-
-Printed Invoice
-
-Added Note
-
-Called Customer
-
-Opened WhatsApp
-
-Exported Report
-
-Every activity should contain:
-
-Time
-
-Device
-
-IP Address
-
----
-
-# Customer Communication Analytics
-
-Measure:
-
-Calls Made
-
-Calls Answered
-
-Missed Calls
-
-WhatsApp Messages
-
-SMS Sent
-
-Email Sent
-
-Average Response Time
-
-Conversion After Call
-
-Recovery After Call
-
----
-
-# Fraud Analytics
-
-Display:
-
-High Risk Orders
-
-Blocked Orders
-
-Duplicate Phones
-
-Duplicate Addresses
-
-Duplicate IPs
-
-Blacklisted Customers
-
-Recovered Fraud Cases
-
-Fraud Trend
-
-Fraud by District
-
-Fraud by Device
-
----
-
-# Order Processing Analytics
-
-Measure:
-
-Average Confirmation Time
-
-Average Packing Time
-
-Average Courier Booking Time
-
-Average Delivery Time
-
-Average Return Time
-
-Average Refund Time
-
-These metrics help optimize operations.
-
----
-
-# Recovery Analytics
-
-Display:
-
-Failed Orders
-
-Recovered Orders
-
-Recovery Revenue
-
-Recovery Success %
-
-Recovery Time
-
-Employee Recovery Ranking
-
-Best Recovery Channel
-
-Phone
-
-WhatsApp
-
-SMS
+Custom Period
 
 ---
 
@@ -2921,19 +2212,19 @@ Display:
 
 Orders Per Courier
 
-Delivery Success %
-
 Average Delivery Time
+
+Delivery Success Rate
 
 Return Rate
 
-Failed Deliveries
-
-Courier Cost
-
 COD Collection Time
 
-Courier Ranking
+Failed Deliveries
+
+Courier Performance Ranking
+
+Courier Cost Analysis (Future)
 
 ---
 
@@ -2947,89 +2238,76 @@ Online Payments
 
 Pending Payments
 
-Failed Payments
-
 Refunded Payments
 
 Payment Method Distribution
 
 Average Transaction Value
 
----
-
-# Customer Insights
-
-Display:
-
-Top Customers
-
-Repeat Customers
-
-VIP Customers
-
-Inactive Customers
-
-Highest Spending Customers
-
-Average Customer Value
-
-Lifetime Value
+Gateway Performance
 
 ---
 
-# Geographic Analytics
-
-Interactive map (Future)
+# Fraud Analytics
 
 Display:
 
-Orders by Division
+High Risk Orders
 
-Orders by District
+Duplicate Customers
 
-Orders by Area
+Blacklisted Customers
 
-Delivery Performance
+Fraud Detection Success
 
-Revenue by Region
+Cancelled Fake Orders
 
-Heat Map
+Verification Required Orders
+
+Fraud Trend
+
+High Risk Districts
 
 ---
 
 # Export Center
 
-Reports should export as:
+Every report supports export.
 
-Excel
+Formats:
 
-CSV
+- Excel (.xlsx)
+- CSV
+- PDF
+- Print
 
-PDF
+Future:
 
-Print
+Google Sheets
 
-Email
+Power BI
 
-Scheduled Reports (Future)
+Looker Studio
 
 ---
 
 # Scheduled Reports
 
-Business owners may receive:
+Business owners may automatically receive reports.
 
-Daily Report
+Examples:
 
-Weekly Report
+Daily Summary
 
-Monthly Report
+Weekly Summary
 
-Quarterly Report
+Monthly Business Report
+
+Quarterly Performance
 
 Yearly Report
 
-via:
+Delivery methods:
 
 Email
 
@@ -3039,611 +2317,103 @@ Telegram (Future)
 
 ---
 
-# AI Insights (Future Ready)
+# AI Business Insights
 
-The system may recommend:
-
-Increase stock for Product X.
-
-Courier Y performs better in Dhaka.
-
-Employee A needs additional training.
-
-COD verification is recommended for this customer.
-
-Sales are expected to increase next week.
-
-Recovery call should be attempted within 20 minutes.
-
----
-
-# Custom Dashboard
-
-Business owners may:
-
-Hide Widgets
-
-Move Widgets
-
-Resize Widgets
-
-Pin Widgets
-
-Save Personal Dashboard Layout
-
----
-
-# Success Criteria
-
-The analytics system should help business owners make better operational decisions using real-time data, employee performance metrics, and predictive insights rather than relying on guesswork.
-
-
-
----
-
-# Returns, Exchange & Refund Center
-
-The Returns, Exchange & Refund Center manages every post-delivery customer request.
-
-Its purpose is to ensure a transparent, structured, and auditable process for handling returned products, product exchanges, and customer refunds while protecting business interests.
-
-Every request should follow a defined workflow.
-
----
-
-# Supported Request Types
-
-The system should support:
-
-- Product Return
-- Product Exchange
-- Full Refund
-- Partial Refund
-- Partial Exchange
-- Replacement Product
-- Warranty Claim (Future)
-
-Every request receives a unique Request ID.
-
----
-
-# Return Workflow
-
-Customer submits return request.
-
-↓
-
-Return Request Created.
-
-↓
-
-Admin Review.
-
-↓
-
-Approve or Reject.
-
-↓
-
-Courier Pickup Scheduled.
-
-↓
-
-Product Received.
-
-↓
-
-Warehouse Inspection.
-
-↓
-
-Quality Check.
-
-↓
-
-Inventory Decision.
-
-↓
-
-Refund or Exchange.
-
-↓
-
-Case Closed.
-
-Every step must be recorded in the timeline.
-
----
-
-# Return Request List
-
-Display:
-
-Request ID
-
-Order ID
-
-Customer
-
-Phone
-
-Products
-
-Request Type
-
-Reason
-
-Status
-
-Created Date
-
-Assigned Employee
-
-Priority
-
-Actions
-
----
-
-# Request Status
-
-Available statuses:
-
-Pending Review
-
-Approved
-
-Rejected
-
-Pickup Scheduled
-
-Product Received
-
-Inspection Pending
-
-Inspection Complete
-
-Refund Approved
-
-Refund Completed
-
-Exchange Approved
-
-Exchange Shipped
-
-Closed
-
----
-
-# Return Reasons
-
-Business owners may configure reasons.
+Future AI services may analyze business data.
 
 Examples:
 
-Wrong Product
+Sales dropped compared to last week.
 
-Wrong Size
+Courier performance decreased.
 
-Wrong Color
+Product X requires additional stock.
 
-Damaged Product
+Customer retention is improving.
 
-Defective Product
+Delivery success rate is declining.
 
-Courier Damage
+Recommend promotional campaign.
 
-Changed Mind
-
-Late Delivery
-
-Duplicate Order
-
-Other
-
-Reasons should be editable from the Admin Panel.
+AI recommendations should always include an explanation.
 
 ---
 
-# Customer Evidence
+# Operational KPIs
 
-Customers may upload:
+The dashboard should continuously calculate:
 
-Product Images
+Average Confirmation Time
 
-Damage Photos
+Average Packing Time
 
-Unboxing Video (Future)
+Average Delivery Time
 
-Payment Screenshot
+Average Return Time
 
-Supporting Documents
-
-Employees should preview files without downloading.
-
----
-
-# Warehouse Inspection
-
-Warehouse employees record:
-
-Package Condition
-
-Product Condition
-
-Accessories Included
-
-Original Packaging
-
-Physical Damage
-
-Inspection Notes
-
-Decision
-
-Inspection images should be stored permanently.
-
----
-
-# Inventory Decision
-
-After inspection:
-
-Return to Stock
-
-Repair
-
-Replace
-
-Discard
-
-Hold for Review
-
-Inventory should update automatically after approval.
-
----
-
-# Exchange Workflow
-
-Exchange request:
-
-Original Product
-
-↓
-
-Inspection
-
-↓
-
-Replacement Product Selected
-
-↓
-
-Stock Reserved
-
-↓
-
-Courier Assigned
-
-↓
-
-Replacement Shipped
-
-↓
-
-Exchange Completed
-
-Price differences should be calculated automatically.
-
----
-
-# Refund Workflow
-
-Refund Methods:
-
-Cash
-
-bKash
-
-Nagad
-
-Rocket
-
-Bank Transfer
-
-Card Refund (Future)
-
-Store Credit (Future)
-
-Every refund must include:
-
-Refund Amount
-
-Refund Method
-
-Refund Date
-
-Approved By
-
-Reference Number
-
----
-
-# Partial Refund
-
-Support refunding part of the order.
-
-Examples:
-
-Refund Delivery Charge
-
-Refund One Product
-
-Refund Discount Difference
-
-Refund Compensation
-
-Every partial refund should update financial reports.
-
----
-
-# Return Fraud Detection
-
-Display warnings:
-
-Frequent Return Customer
-
-Multiple Refund Requests
-
-Repeated Damage Claims
-
-High Return Rate
-
-Suspicious Activity
-
-High-risk customers may require manual approval.
-
----
-
-# Return Timeline
-
-Every action should appear.
-
-Example:
-
-Request Submitted
-
-↓
-
-Employee Reviewed
-
-↓
-
-Approved
-
-↓
-
-Pickup Scheduled
-
-↓
-
-Product Received
-
-↓
-
-Inspection Complete
-
-↓
-
-Refund Sent
-
-↓
-
-Case Closed
-
-Timeline entries cannot be edited.
-
----
-
-# Customer Communication
-
-Quick actions:
-
-📞 Call Customer
-
-💬 WhatsApp
-
-📧 Email
-
-📱 SMS
-
-Internal communication history should remain attached to the request.
-
----
-
-# Return Analytics
-
-Display:
+Order Completion Rate
 
 Return Rate
 
-Exchange Rate
-
 Refund Rate
 
-Top Return Reasons
+Delivery Success Rate
 
-Return Cost
+Revenue Growth
 
-Recovered Products
+Customer Growth
 
-Damaged Products
+Employee Productivity
 
-Employee Performance
-
-Courier Return Rate
-
-Product Return Rate
-
-These reports help reduce future returns.
+These KPIs should be visible to authorized users.
 
 ---
 
-# Return Documents
+# Data Retention
 
-Generate:
+Historical reports should remain available.
 
-Return Receipt
+Business owners may compare:
 
-Exchange Slip
+Current Month
 
-Refund Receipt
+Previous Month
 
-Warehouse Inspection Sheet
+Previous Year
 
-Courier Return Label
+Custom Period
 
-All documents should support PDF export.
-
----
-
-# Notifications
-
-Automatically notify customers when:
-
-Return Approved
-
-Pickup Scheduled
-
-Product Received
-
-Inspection Complete
-
-Refund Processed
-
-Exchange Shipped
-
-Case Closed
-
-Notification channels:
-
-Email
-
-SMS
-
-WhatsApp
-
-Push Notification (Future)
-
----
-
-# Permissions
-
-Super Admin:
-
-Full access.
-
-Admin:
-
-Approve
-
-Reject
-
-Refund
-
-Exchange
-
-Employee:
-
-Review
-
-Add Notes
-
-Update Status
-
-Warehouse:
-
-Inspection
-
-Inventory Decision
-
-Finance:
-
-Refund Processing
-
-Every permission should be configurable through Role Management.
-
----
-
-# Audit Log
-
-Every action must be recorded.
-
-Store:
-
-User
-
-Action
-
-Timestamp
-
-Old Value
-
-New Value
-
-IP Address
-
-Device
-
-Audit records cannot be deleted.
-
----
-
-# Future AI Features
-
-The platform may recommend:
-
-Likely fraud cases.
-
-High-risk return requests.
-
-Products with abnormal return rates.
-
-Courier-related damage trends.
-
-Suggested refund decisions.
-
-Customer lifetime value before approving refunds.
+No historical business report should be permanently removed without administrator approval.
 
 ---
 
 # Success Criteria
 
-The Returns, Exchange & Refund Center should provide a structured, transparent, and auditable process that protects both the customer and the business while minimizing manual effort and preventing abuse.
+The reporting system should help business owners make faster, data-driven decisions while providing complete operational visibility across orders, customers, employees, payments, and courier operations.
 
 ---
 
-# Automation Center
+# Automation & Notification Engine
 
-The Automation Center eliminates repetitive operational work by executing predefined business rules automatically.
+The Automation & Notification Engine is responsible for reducing manual work by executing configurable business workflows.
 
-Business owners should build automation workflows without writing code.
+Business owners should automate repetitive operational tasks without modifying source code.
 
-Every automation must be configurable from the Admin Panel.
+Automation must be configurable from the Admin Panel.
 
 ---
 
-# Workflow Builder
+# Automation Philosophy
 
-Automation follows an IF → THEN model.
+The platform follows an event-driven automation model.
 
-Example:
+Every important business event may trigger one or more automated actions.
 
-IF
+Examples:
 
-Order Status = Confirmed
+Order Confirmed
 
-THEN
+↓
 
 Reserve Inventory
 
@@ -3654,236 +2424,97 @@ Generate Invoice
 ↓
 
 Assign Courier
-
-↓
-
-Send WhatsApp
-
-↓
-
-Send Email
-
-↓
-
-Create Timeline Event
 
 ↓
 
 Notify Warehouse
 
----
-
-# Trigger Events
-
-Automation may start when:
-
-Order Created
-
-Order Updated
-
-Order Confirmed
-
-Order Cancelled
-
-Order Packed
-
-Courier Assigned
-
-Order Shipped
-
-Order Delivered
-
-Order Returned
-
-Refund Approved
-
-Exchange Approved
-
-Customer Registered
-
-Employee Assigned
-
-Payment Received
-
-Payment Failed
-
-Coupon Used
-
-Manual Trigger
-
-Scheduled Trigger
-
-Webhook Trigger
-
----
-
-# Available Actions
-
-The system may automatically:
-
-Generate Invoice
-
-Assign Courier
-
-Reserve Inventory
-
-Release Inventory
-
-Send SMS
-
-Send WhatsApp
-
-Send Email
-
-Notify Employee
-
-Notify Admin
-
-Create Internal Note
-
-Update Customer Tags
-
-Update Loyalty Points
-
-Generate Report
-
-Export Data
-
-Call External API
-
-Trigger Webhook
-
-Execute Plugin Action
-
-Future AI Action
-
----
-
-# Business Rules Engine
-
-Business owners should configure business rules without modifying source code.
-
-Examples:
-
-Maximum COD Amount
-
-Minimum Order Amount
-
-Free Shipping Threshold
-
-Express Delivery Areas
-
-Restricted Delivery Areas
-
-Weekend Delivery Rules
-
-Holiday Rules
-
-VIP Customer Rules
-
-Return Eligibility
-
-Exchange Eligibility
-
-Courier Selection Rules
-
-Every rule should support enable/disable.
-
----
-
-# Pending Order Timer
-
-Each pending order should display a live timer.
-
-Examples:
-
-🟢 00:08
-
-🟡 00:18
-
-🟠 00:28
-
-🔴 00:45
-
-Businesses may configure warning thresholds.
-
----
-
-# Escalation Rules
-
-If a pending order is not processed within the configured time:
-
-Notify Assigned Employee
-
 ↓
 
-Notify Team Leader
-
-↓
-
-Notify Admin
-
-↓
-
-Mark High Priority
-
-↓
-
-Display Dashboard Alert
-
-Every escalation rule should be configurable.
+Notify Customer
 
 ---
 
-# Reminder Center
+# Automation Triggers
 
-Automatic reminders may be sent for:
+The system supports triggers such as:
 
-Pending Orders
+- Order Created
+- Order Verified
+- Order Confirmed
+- Order Cancelled
+- Payment Verified
+- Invoice Generated
+- Courier Assigned
+- Pickup Completed
+- Order Shipped
+- Order Delivered
+- Return Requested
+- Refund Approved
+- Exchange Approved
 
-Courier Pickup
+Future modules may register additional triggers.
 
-Payment Collection
+---
 
-Return Inspection
+# Automation Actions
 
-Refund Approval
+Available automation actions include:
 
-Exchange Shipment
+- Update Order Status
+- Assign Employee
+- Reserve Inventory
+- Release Inventory
+- Generate Invoice
+- Create Courier Booking
+- Send Email
+- Send SMS
+- Send WhatsApp
+- Push Notification
+- Create Internal Task
+- Add Timeline Event
+- Call External API
+- Trigger Webhook
 
-Employee Follow-up
-
-Support Callback
+Actions should be reusable across multiple workflows.
 
 ---
 
 # Notification Center
 
-Supported notification channels:
+Every significant order event should generate notifications.
 
-Dashboard Notification
+Recipients may include:
 
-Email
+- Customer
+- Assigned Employee
+- Team Leader
+- Administrator
+- Warehouse
+- Finance Team
 
-SMS
+Notification delivery depends on user preferences and permissions.
 
-WhatsApp
+---
 
-Push Notification (Future)
+# Notification Channels
 
-Telegram (Future)
+Supported channels:
 
-Slack (Future)
+- Dashboard Notification
+- Email
+- SMS
+- WhatsApp
+- Push Notification (Future)
+- Telegram (Future)
 
-Microsoft Teams (Future)
-
-Each notification template should be editable.
+Business owners may enable or disable each channel independently.
 
 ---
 
 # Notification Templates
 
-Templates should support placeholders.
+Templates should support dynamic placeholders.
 
 Examples:
 
@@ -3893,248 +2524,516 @@ Examples:
 
 {{TrackingNumber}}
 
-{{Courier}}
+{{CourierName}}
 
-{{GrandTotal}}
+{{TotalAmount}}
 
 {{SupportPhone}}
 
-Business owners may edit templates without code.
+Templates should be editable from the Admin Panel.
 
 ---
 
-# Webhook Center
+# Reminder Engine
 
-The system should emit webhooks for major events.
+Automatic reminders may be generated for:
 
-Examples:
+- Pending Verification
+- Pending Confirmation
+- Pending Courier Booking
+- Failed Delivery Follow-up
+- Return Inspection
+- Refund Processing
+- Customer Callback
 
-Order Created
-
-Order Confirmed
-
-Courier Assigned
-
-Order Delivered
-
-Refund Completed
-
-Exchange Completed
-
-Payment Received
-
-Webhook retries should be automatic.
-
-Webhook history must be available.
+Reminder intervals should be configurable.
 
 ---
 
-# API Event Center
+# Internal Tasks
 
-Every important business action should generate an internal event.
-
-Examples:
-
-ORDER_CREATED
-
-ORDER_CONFIRMED
-
-ORDER_CANCELLED
-
-ORDER_PACKED
-
-ORDER_SHIPPED
-
-ORDER_DELIVERED
-
-RETURN_CREATED
-
-REFUND_COMPLETED
-
-Future modules subscribe to these events.
-
----
-
-# SLA Monitoring
-
-The system should measure operational performance.
+The system should automatically create internal tasks when required.
 
 Examples:
 
-Pending Confirmation Time
-
-Packing Time
-
-Courier Booking Time
-
-Delivery Time
-
-Refund Processing Time
-
-Exchange Processing Time
-
-Late tasks should generate alerts.
-
----
-
-# Internal Task Queue
-
-Employees may create operational tasks.
-
-Examples:
-
-Call Customer
-
-Verify Address
-
-Confirm COD
-
-Recheck Payment
-
-Inspect Return
-
-Follow Up Tomorrow
+- Verify Customer
+- Confirm Payment
+- Contact Customer
+- Inspect Return
+- Approve Refund
 
 Tasks support:
 
-Priority
-
-Due Date
-
-Assigned Employee
-
-Completion Status
+- Priority
+- Due Date
+- Assigned Employee
+- Completion Status
 
 ---
 
-# Order Checklist
+# Workflow Builder (Future)
 
-Every order may include a checklist.
+Future versions may include a visual workflow builder.
 
 Example:
 
-☐ Customer Verified
+IF
 
-☐ Address Verified
+Payment Method = COD
 
-☐ Payment Verified
+AND
 
-☐ Product Available
+Order Value > ৳10,000
 
-☐ Invoice Printed
+THEN
 
-☐ Courier Assigned
+Require Manual Verification
 
-☐ Package Checked
+↓
 
-☐ Quality Inspection
+Notify Team Leader
 
-Checklist templates should be configurable.
+↓
 
----
+Block Courier Booking Until Approved
 
-# Operational Calendar
-
-Display scheduled:
-
-Courier Pickups
-
-Employee Shifts
-
-Bulk Dispatch
-
-Expected Deliveries
-
-Refund Deadlines
-
-Exchange Deadlines
-
-Warehouse Activities
+Business users should configure workflows without programming knowledge.
 
 ---
 
-# AI Recommendations (Future Ready)
+# Event Logging
 
-Future AI services may recommend:
+Every automation execution should create a system log.
 
-Call this customer now.
+Each log contains:
 
-Use Courier X instead of Courier Y.
+- Event
+- Trigger
+- Executed Actions
+- Execution Time
+- Result
+- Error Details (if any)
 
-Delay shipment until payment verification.
-
-Potential fake order detected.
-
-Offer discount to recover abandoned order.
-
-Restock Product X.
-
-Increase inventory.
-
-Expected delivery delay.
-
-Every recommendation should include an explanation.
-
----
-
-# Order Health Score
-
-Every order receives a health score.
-
-Example:
-
-🟢 Excellent
-
-🟡 Good
-
-🟠 Attention Required
-
-🔴 Critical
-
-The score considers:
-
-Fraud Risk
-
-Customer History
-
-Processing Delay
-
-Courier Status
-
-Payment Status
-
-Employee Notes
-
-Inventory Status
-
----
-
-# Audit & Compliance
-
-Every automation execution should be logged.
-
-Store:
-
-Automation Name
-
-Trigger
-
-Executed Action
-
-Execution Time
-
-Result
-
-Success / Failure
-
-Responsible User
-
-System Event ID
-
-Logs must be searchable.
+Logs should support search and filtering.
 
 ---
 
 # Success Criteria
 
-The Automation Center should eliminate repetitive operational work, reduce processing time, improve consistency, and allow business owners to automate workflows entirely from the Admin Panel without requiring software development.
+The Automation & Notification Engine should significantly reduce repetitive manual work while ensuring that important business events are handled consistently, transparently, and reliably.
+
+---
+
+# Technical Architecture
+
+The Order Management module should follow a modular, scalable, and service-oriented architecture.
+
+The implementation must separate business logic, presentation logic, integrations, and data persistence.
+
+Future extensions must be possible without modifying existing core workflows.
+
+---
+
+# Database Entities
+
+The Order Management module requires the following primary entities:
+
+Core Entities
+
+- Orders
+- Order Items
+- Customers
+- Employees
+- Products
+- Payments
+- Couriers
+
+Operational Entities
+
+- Order Timeline
+- Internal Notes
+- Fraud Reports
+- Attachments
+- Refunds
+- Returns
+- Exchanges
+
+Analytics Entities
+
+- Employee Performance
+- Order Analytics
+- Courier Analytics
+- Payment Analytics
+
+Future modules may introduce additional entities without modifying existing schemas.
+
+---
+
+# API Requirements
+
+Every business operation should be exposed through secure APIs.
+
+Examples:
+
+Orders
+
+GET /orders
+
+GET /orders/{id}
+
+POST /orders
+
+PATCH /orders/{id}
+
+DELETE /orders/{id}
+
+Status
+
+PATCH /orders/{id}/status
+
+Employee
+
+PATCH /orders/{id}/assign
+
+Courier
+
+POST /orders/{id}/courier
+
+Payment
+
+POST /orders/{id}/payment
+
+Refund
+
+POST /orders/{id}/refund
+
+Timeline
+
+GET /orders/{id}/timeline
+
+Every endpoint should require authentication.
+
+---
+
+# Permission Matrix
+
+Permissions must be configurable.
+
+Examples:
+
+View Orders
+
+Create Orders
+
+Edit Orders
+
+Delete Orders
+
+Confirm Orders
+
+Cancel Orders
+
+Assign Employee
+
+Assign Courier
+
+Verify Payment
+
+Approve Refund
+
+Export Reports
+
+View Analytics
+
+Manage Settings
+
+Permissions should never be hardcoded.
+
+All permissions must be managed through Role Management.
+
+---
+
+# Validation Rules
+
+Before any operation, the system validates:
+
+Customer Information
+
+Phone Number
+
+Delivery Address
+
+Product Availability
+
+Inventory
+
+Payment Status
+
+Order Status
+
+Employee Permission
+
+Business Rules
+
+Invalid operations should return clear validation errors.
+
+---
+
+# Security Requirements
+
+Every request must be protected.
+
+Requirements:
+
+Authentication
+
+Authorization
+
+CSRF Protection
+
+Rate Limiting
+
+Input Validation
+
+Output Sanitization
+
+Audit Logging
+
+Sensitive Data Protection
+
+Every critical action requires permission verification.
+
+---
+
+# Performance Targets
+
+Target performance:
+
+Order List
+
+< 500ms
+
+Order Details
+
+< 300ms
+
+Search
+
+< 500ms
+
+Filters
+
+< 500ms
+
+Timeline
+
+< 300ms
+
+Dashboard Widgets
+
+< 2 seconds
+
+Large datasets should support server-side pagination.
+
+---
+
+# Error Handling
+
+Errors should always provide:
+
+Readable Message
+
+Technical Error Code
+
+Timestamp
+
+Request ID
+
+Every unexpected error should be logged automatically.
+
+---
+
+# Audit Strategy
+
+The audit system records:
+
+Who
+
+performed
+
+What
+
+Action
+
+When
+
+Timestamp
+
+Where
+
+Device
+
+IP Address
+
+Why
+
+Reason (when provided)
+
+Audit records are immutable.
+
+---
+
+# Logging Strategy
+
+System logs should capture:
+
+API Errors
+
+Database Errors
+
+Integration Errors
+
+Automation Errors
+
+Courier Errors
+
+Payment Errors
+
+Authentication Failures
+
+Logs should support:
+
+Filtering
+
+Searching
+
+Exporting
+
+Retention Policies
+
+---
+
+# Backup & Recovery
+
+Order information is business-critical.
+
+Requirements:
+
+Automated Database Backups
+
+Backup Verification
+
+Point-in-Time Recovery (Future)
+
+Disaster Recovery Plan
+
+Encrypted Backups
+
+Backup Status Monitoring
+
+---
+
+# Scalability
+
+The architecture should support:
+
+Millions of Orders
+
+Thousands of Concurrent Users
+
+Multiple Warehouses
+
+Multiple Brands
+
+Multiple Storefronts
+
+International Expansion
+
+without requiring architectural redesign.
+
+---
+
+# Future Expansion
+
+Future capabilities may include:
+
+AI Order Assistant
+
+Voice Order Management
+
+WhatsApp Commerce
+
+Marketplace Synchronization
+
+Multi-Brand Operations
+
+B2B Order Processing
+
+Subscription Orders
+
+Wholesale Orders
+
+POS Integration
+
+Vendor Portal
+
+---
+
+# Implementation Checklist
+
+## User Interface
+
+- [ ] Order List
+- [ ] Order Details Drawer
+- [ ] Timeline
+- [ ] Internal Notes
+- [ ] Courier Section
+- [ ] Payment Section
+- [ ] Analytics Dashboard
+
+## Backend
+
+- [ ] Order Service
+- [ ] Payment Service
+- [ ] Courier Service
+- [ ] Timeline Service
+- [ ] Fraud Detection Service
+- [ ] Automation Service
+
+## Database
+
+- [ ] Orders
+- [ ] Order Items
+- [ ] Timeline
+- [ ] Notes
+- [ ] Refunds
+- [ ] Returns
+- [ ] Audit Logs
+
+## Integrations
+
+- [ ] Courier APIs
+- [ ] Payment Gateways
+- [ ] Email
+- [ ] SMS
+- [ ] WhatsApp
+
+## Testing
+
+- [ ] Unit Testing
+- [ ] Integration Testing
+- [ ] API Testing
+- [ ] Security Testing
+- [ ] Performance Testing
+
+---
+
+# Success Criteria
+
+The Order Management module is considered complete when it provides a secure, scalable, configurable, and efficient operational workspace capable of supporting enterprise ecommerce businesses while remaining extensible for future growth.
+
+---
+
+Status:
+
+Version 2.0 Completed
