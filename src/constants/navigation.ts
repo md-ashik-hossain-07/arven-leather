@@ -1,5 +1,6 @@
 export const storefrontNavigation = [
-  { label: "New arrivals", href: "#new-arrivals" },
+  { label: "Shop", href: "/shop" },
+  { label: "New arrivals", href: "/shop" },
   { label: "Shoes", href: "#shoes" },
   { label: "Bags", href: "#bags" },
   { label: "Wallets", href: "#wallets" },
